@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Prata&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@500&display=swap" rel="stylesheet">
+
+    <title>Document</title>
+    <style>
+        body {
+            background: url(./charlesdeluvio-pcZvxrAyYoQ-unsplash.jpg) no-repeat fixed center;
+            background-size: cover;
+            padding: 8%;
+        }
+
+
+        #line{
+            width: 370px;
+            height: 370px;
+            position: relative;
+            border: .5px solid rgba(240, 124, 124, 0.507);
+            box-shadow: 1px 1px 3px rgba(240, 124, 124, 0.568),
+            -1px -1px 3px rgba(240, 124, 124, 0.473),
+            inset 1px 1px 3px rgba(240, 124, 124, 0.507),
+            inset -1px -1px 3px rgba(240, 124, 124, 0.521);
+            border-radius: 50%;
+            left: 35%;
+        }
+
+        #line::before{
+            content: '';
+            width: 440px;
+            height: 440px;
+            position: absolute;
+            border: .5px solid rgba(72, 245, 66, 0.459);
+            box-shadow: 1px 1px 3px rgba(72, 245, 66, 0.452),
+            -1px -1px 3px rgba(72, 245, 66, 0.37),
+            inset 1px 1px 3px rgba(72, 245, 66, 0.397),
+            inset -1px -1px 3px rgba(72, 245, 66, 0.37);
+            border-radius: 50%;
+            left: -10%;
+            top:-10%;
+
+        }
+        #line::after{
+            content: '';
+            width: 530px;
+            height: 530px;
+            position: absolute;
+            border: .5px solid rgb(55, 83, 238);
+            box-shadow: .5px .5px 2px rgb(55, 83, 238),
+            -.5px -.5px 2px rgb(55, 83, 238),
+            inset .5px .5px 1px rgb(55, 83, 238),
+            inset -.5px -.5px 1px rgb(55, 83, 238);
+            border-radius: 50%;
+            left: -23%;
+            top:-23%;
+
+        }
+            
+
+        #out {
+            border-radius: 50%;
+            width: 310px;
+            height: 310px;
+            margin: auto;
+            /* background: linear-gradient( 0deg , #000,#262626); */
+            position: relative;
+            top:30px
+        }
+
+        #out::before {
+            content: '';
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: linear-gradient(45deg, hsl(325, 100%, 73%), rgb(124, 124, 255), rgb(134, 248, 134), rgb(230, 230, 111), rgb(230, 96, 96), #ec68b5, rgb(110, 110, 230), rgb(147, 243, 147), rgb(228, 228, 133), rgb(240, 139, 139));
+            width: 100%;
+            height: 100%;
+            background-size: 400%;
+            animation: animation 5s linear infinite;
+        }
+
+        #out::after {
+            content: '';
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            /* background: linear-gradient(45deg, #fb0094, #00f, #0f0, #ff0, #f00, #fb0094, #00f, #0f0, #ff0, #f00); */
+            background: linear-gradient(45deg, hsl(325, 100%, 73%), rgb(124, 124, 255), rgb(134, 248, 134), rgb(230, 230, 111), rgb(230, 96, 96), #ec68b5, rgb(110, 110, 230), rgb(147, 243, 147), rgb(228, 228, 133), rgb(240, 139, 139));
+            width: 100%;
+            height: 100%;
+            background-size: 400%;
+            animation: animation 5s linear infinite;
+            z-index: -1;
+            filter: blur(20px);
+        }
+        @keyframes animation {
+            0%,
+            100% {
+                background-position: 0 0;
+            }50% {
+                background-position: 100% 0;
+            }
+        }
+
+        #clock {
+            margin: auto;
+            background: rgb(0, 0, 0);
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            position: relative;
+            top: 15px;
+
+        }
+
+
+        .number span {
+            /*表面時間旋轉*/
+            position: absolute;
+            inset: 20px;
+            color: rgb(255, 255, 255);
+            text-align: center;
+            transform: rotate(calc(29.4deg*var(--i)));
+            /*每小時30deg，但會有偏移(6，12對不上直線)，微調成29.4deg*/
+        }
+
+        .number b {
+            /*數字轉正*/
+            width: 20px;
+            position: absolute;
+            transform: rotate(calc(-29.4deg*var(--i)));
+            font-family: 'Prata', serif;
+            font-size: 20px;
+        }
+
+        .hour {
+            width: 20%;
+            height: 5px;
+            background-color: rgb(240, 124, 124);
+            box-shadow: 1px 1px 10px rgb(240, 124, 124), -1px -1px 10px rgb(240, 124, 124);
+            position: absolute;
+            top: calc(50% - 5px);
+            /*calc +-乘除  前後+空格*/
+            left: calc(50% - 5px);
+            border-radius: 5px;
+            transform-origin: left center;
+        }
+
+        .hour::before{
+            content: '';
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgb(240, 124, 124);
+            box-shadow: 2px 2px 10px rgb(255, 255, 255),-2px -2px 10px rgb(255, 255, 255);
+            position: absolute;
+            transform-origin: left center;
+            top: calc(50% - 5px);
+            /*calc +-乘除  前後+空格*/
+            left: calc(305% - 5px);
+            
+        }
+
+
+        .minute {
+            width: 30%;
+            height: 3px;
+            background-color: rgb(72, 245, 66);
+            box-shadow: 1px 1px 10px rgb(72, 245, 66), -1px -1px 10px rgb(72, 245, 66);
+            position: absolute;
+            top: calc(50% - 5px);
+            /*calc +-乘除  前後+空格*/
+            left: calc(50% - 5px);
+            border-radius: 5px;
+            transform-origin: left center;
+        }
+        .minute::before{
+            content: '';
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: rgb(72, 245, 66);
+            box-shadow: 2px 2px 10px rgb(255, 255, 255),-2px -2px 10px rgb(255, 255, 255);
+            position: absolute;
+            transform-origin: left center;
+            top: calc(50% - 5px);
+            /*calc +-乘除  前後+空格*/
+            left: calc(260% - 5px);
+        }
+
+        .second {
+            width: 35%;
+            height: 1px;
+            background-color: rgb(55, 83, 238);
+            box-shadow: 5px 5px 10px rgb(37, 61, 196), -1px -1px 10px rgb(39, 59, 172);
+            position: absolute;
+            top: calc(50% - 5px);
+            /*calc +-乘除  前後+空格*/
+            left: calc(50% - 5px);
+            border-radius: 5px;
+            transform-origin: left center;
+        }
+        .second::before{
+            content: '';
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgb(55, 83, 238);
+            box-shadow: 2px 2px 10px rgb(255, 255, 255),-2px -2px 10px rgb(255, 255, 255);
+            position: absolute;
+            transform-origin: left center;
+            top: calc(50% - 5px);
+            /*calc +-乘除  前後+空格*/
+            left: calc(270% - 5px);
+            
+            
+        }
+
+        #mask {
+            margin: auto;
+            background: rgb(255, 255, 255);
+            box-shadow: 2px 2px 10px white, 2px 2px 10px white, -2px -2px 10px white, -2px -2px 10px white;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            position: absolute;
+            top: 47%;
+            left: 47%;
+        }
+
+        #today{
+            margin: 40% 0 0 auto;
+            display: inline-block;
+            width: 250px;
+            height: 50px;
+            text-align: center;
+            background: rgb(0, 0, 0);
+            color: rgb(97, 31, 94);
+            position: relative;
+            top: 120%;
+            left: 5%;
+            box-shadow: inset 2px 2px 10px rgb(20, 1, 20),inset -2px -2px 10px purple;
+            border-radius: 20px;
+        }
+        #today::before{
+            content: '';
+            width: 254px;
+            height: 54px;
+            background: linear-gradient(45deg, hsl(325, 100%, 73%), rgb(124, 124, 255), rgb(134, 248, 134), rgb(230, 230, 111), rgb(230, 96, 96), #ec68b5, rgb(110, 110, 230), rgb(147, 243, 147), rgb(228, 228, 133), rgb(240, 139, 139));
+            background-size: 400%;
+            animation: animation 5s linear infinite;
+            box-shadow: 2px 2px 10px purple,-2px -2px 10px purple;
+            position: absolute;
+            top:-1px;
+            left: -1px;
+            z-index: -1;
+            border-radius: 20px;
+            
+
+        }
+
+
+        #today span{
+            color: rgb(255, 255, 255);
+            text-shadow: 2px 2px 10px white,-2px -2px 10px white;            
+            font-size: 25px;
+            font-family: 'Inconsolata', monospace , '微軟正黑體';
+            font-weight: bolder;
+            line-height: 50px;
+            
+        }
+    </style>
+</head>
+
+<body>
+
+  
+
+    <div id="line">
+
+        <div id="out">
+    
+            <div id="clock">
+    
+                <div class="hour"></div>
+                <div class="minute"></div>
+                <div class="second"></div>
+                <div class="number">
+                    <!-- 時間刻度 --i =>變數 -->
+                    <span style="--i:1"><b>1</b></span>
+                    <span style="--i:2"><b>2</b></span>
+                    <span style="--i:3"><b>3</b></span>
+                    <span style="--i:4"><b>4</b></span>
+                    <span style="--i:5"><b>5</b></span>
+                    <span style="--i:6"><b>6</b></span>
+                    <span style="--i:7"><b>7</b></span>
+                    <span style="--i:8"><b>8</b></span>
+                    <span style="--i:9"><b>9</b></span>
+                    <span style="--i:10"><b>10</b></span>
+                    <span style="--i:11"><b>11</b></span>
+                    <span style="--i:12"><b>12</b></span>
+                </div>
+    
+                <div id="today">
+                    <span id="year"></span>
+                    <span id="mon"></span>
+                    <span id="day"></span>
+                </div>
+    
+            </div>
+            <div id="mask"></div>
+        </div>
+    </div>
+
+    <script>
+        const elHour = document.querySelector('.hour')
+        const elMinute = document.querySelector('.minute')
+        const elSecond = document.querySelector('.second')
+        const year = document.querySelector('#year')
+        const mon = document.querySelector('#mon')
+        const day = document.querySelector('#day')
+
+
+
+        function clock() {
+            const date = new Date()
+            elHour.style.transform = `rotate(${date.getHours() * 30 + date.getMinutes() * 0.5 - 90}deg)` /*時針30度+每一分鐘0.5deg*/
+            elMinute.style.transform = `rotate(${date.getMinutes() * 6 - 90}deg)`
+            elSecond.style.transform = `rotate(${date.getSeconds() * 6 - 90}deg)`
+
+        }
+        setInterval(clock, 1000)
+        clock()
+
+        // let today = new Date().toLocaleDateString('zh-tw')
+        // document.write(today)
+
+        let Today = new Date();
+
+        year.innerText = Today.getFullYear()+'年'
+        mon.innerText = Today.getMonth()+1+'月'
+        day.innerText = Today.getDate()+'日'
+
+
+    </script>
+</body>
+
+</html>
