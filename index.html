@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Prata&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <title>Clock</title>
   <style>
@@ -295,30 +296,45 @@
       vertical-align: middle;
       float: left;
     }
-    #weater p{
+/* 
+    #weater p {
       margin: 0;
-    }
+    } */
 
-    #weater p:nth-child(2){
+    #weater p:nth-child(2) {
       text-align: center;
-      color: #ec68b5;
+      color: #f0fbd6;
+      font-size: 18px;
     }
-    #weater p:nth-child(3){
-      color: #68ece3;
+    
+    #weater p:nth-child(3) {
+      color: #ffffff;
+      font-size: 16px;
     }
-    #weater p:nth-child(4){
-      color: #6c3e34;
+    
+    #weater p:nth-child(4) {
+      color: #ffffff;
+      font-size: 16px;
     }
-
+    #next1,#next2{
+      color: white;
+      width: 40px;
+      height: 40px;
+      cursor:pointer;
+      margin: auto;
+    }
 
   </style>
 </head>
 
 <body>
-  <div id="next1" style="display:flex;color: white;">上一頁</div>
-  <div id="next2" style="display:flex;color: white;">下一頁</div>
-  <div id='weater' style="color:wheat ;">
+  <div style="display:flex;width: 150px;">
+    <div id="next1"><i class="fa-solid fa-angle-left"></i></div>
+    <span style="color:#ffffff">CITY</span> 
+    <div id="next2"><i class="fa-solid fa-angle-right"></i></div>
   </div>
+  <div id='weater' style="color:wheat ;">
+</div>
 
   <div id="today">
     <span id="year"></span>
@@ -405,13 +421,15 @@
     let format = "json";
     let weater = document.querySelector("#weater")
 
+    let a = 0
+    let data = ''
 
     //api網址，?前面是放參數
     axios.get(`https://opendata.cwb.gov.tw/fileapi/v1/opendataapi/${dataid}?Authorization=${Authorization}&format=${format}`)
       .then(response => {
 
-        const data = response.data.cwbopendata.dataset.location
-        // for (let i = 0; i < data.length; i++) {
+        data = response.data.cwbopendata.dataset.location
+        // for (let i = 0; i <p data.length; i++) {
         //   console.log(i)
         //   console.log('地區:' + data[i].locationName)//地區
         //   console.log('天氣:' + data[i].weatherElement[0].time[0].parameter.parameterName)//天氣
@@ -420,36 +438,26 @@
         //   console.log('降雨:' + data[i].weatherElement[4].time[0].parameter.parameterName)//降雨機率
         //   console.log('---------------------------')
         // }
-        let a = 0
-        function wea(num) {
-          weater.innerHTML =
-            `<p style="font-size:20px;text-align:center;margin:0">${data[a].locationName}</p>
-            <p>${data[a].weatherElement[0].time[0].parameter.parameterName}</p>
-            <p>高溫:${data[a].weatherElement[1].time[0].parameter.parameterName}度</p>
-            <p>低溫:${data[a].weatherElement[2].time[0].parameter.parameterName}度</p>
-            <p>降雨機率:${data[a].weatherElement[4].time[0].parameter.parameterName}%</p>`
-
-            a += num
-            
-            a =  (a + num + data.length) % data.length
-            
-            
-          console.log(a, num)
-        }
         wea(0)
-
-        next2.onclick = () => {
-          wea(1)
-        }
-        next1.onclick = () => {
-          wea(-1)
-        }
       })
+    function wea(num) {
+      a = (a + num + data.length) % data.length
+      weater.innerHTML =
+        `<p style="font-size:20px;text-align:center;margin:0">${data[a].locationName}</p>
+        <p>${data[a].weatherElement[0].time[0].parameter.parameterName}</p>
+        <p>溫度:${data[a].weatherElement[2].time[0].parameter.parameterName}~${data[a].weatherElement[1].time[0].parameter.parameterName}度</p>
+        <p>降雨機率:${data[a].weatherElement[4].time[0].parameter.parameterName}%</p>`
+      // console.log(a, num)
+    }
 
+    
 
-
-
-
+    next2.onclick = () => {
+      wea(1)
+    }
+    next1.onclick = () => {
+      wea(-1)
+    }
   </script>
 </body>
 
